@@ -89,17 +89,59 @@ public class OrangeHRM {
 		}
 		Assert.assertEquals("Personal Details", confirmationMessage);
 
+		logout();
+
+	}
+
+	@Test(priority = 4)
+	public void searchEmployeebyName() throws InterruptedException {
+		logIn();
+		// Navigate to the "PIM" menu and click PIM
+
+		driver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+
+		// select "Employee List".
+
+		driver.findElement(By.xpath("//a[normalize-space()='Employee List']")).click();
+		// Enter search criteria (e.g., employee name)
+		driver.findElement(By.xpath("(//input[@placeholder='Type for hints...'])[1]")).sendKeys("Istiak");
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();		
+        //  //div[@role='rowgroup']
+		
+		List <WebElement> element1 = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span']"));
+	/*	for(int i = 0; i<=element1.size();i++) {
+			System.out.println(i+ element1.get(i).getText());
+		}
+		
+	*/	
+		List <WebElement> element2 = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
+		System.out.println(element2.size());
+		int value =element2.size(); 
+		String valuetostr = Integer.toString(value);
+		String expectedMessage = "("+valuetostr+") Records Found";
+		
+		String actualMessage = element1.get(0).getText();
+		
+		Assert.assertEquals(expectedMessage, actualMessage);
+		
+		
+		
+		//logout();
+
 	}
 
 	public void logout() throws InterruptedException {
 		driver.findElement(By.xpath("//p[@class='oxd-userdropdown-name']")).click();
 		// driver.findElement(By.xpath("//a[normalize-space()='Logout']")).click();
 		List<WebElement> elementList = driver.findElements(By.xpath("//a[@class='oxd-userdropdown-link']"));
-		/*for (int i = 0; i < elementList.size(); i++) {
-			Thread.sleep(1000);
-			System.out.println(i + ":" + elementList.get(i).getText());
-
-		}*/
+		/*
+		 * for (int i = 0; i < elementList.size(); i++) { Thread.sleep(1000);
+		 * System.out.println(i + ":" + elementList.get(i).getText());
+		 * 
+		 * }
+		 */
 		elementList.get(3).click();
 
 	}
@@ -118,8 +160,8 @@ public class OrangeHRM {
 
 	@AfterTest
 	public void tearDown() throws InterruptedException {
-		logout();
-		Thread.sleep(5000);
+
+		Thread.sleep(15000);
 		driver.close();
 		driver.quit();
 	}
