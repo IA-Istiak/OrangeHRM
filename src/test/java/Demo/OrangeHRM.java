@@ -1,5 +1,6 @@
 package Demo;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class OrangeHRM {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	public void validcredentialsLoginTest() throws InterruptedException {
 		driver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("Admin");
 		driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("admin123");
@@ -50,7 +51,7 @@ public class OrangeHRM {
 		Thread.sleep(1500);
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	public void invalidcredentialsLoginTest() throws InterruptedException {
 		driver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("Admin32");
 		driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("admin12323");
@@ -65,7 +66,7 @@ public class OrangeHRM {
 		Thread.sleep(1500);
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
 	public void addEmployee() throws InterruptedException {
 		logIn();
 		// Navigate to the "PIM" menu and click PIM
@@ -82,6 +83,12 @@ public class OrangeHRM {
 		String confirmationMessage = driver.findElement(By.xpath("//h6[normalize-space()='Personal Details']"))
 				.getText();
 
+		/*
+		 * WebElement userid = driver.findElements(By.tagName("input")).get(5); String
+		 * id = userid.getAttribute("value"); System.out.println(id +"AFSDF");
+		 * Thread.sleep(1500);
+		 */
+
 		if (confirmationMessage.contains("Personal Details")) {
 			System.out.println("Employee added successfully!");
 		} else {
@@ -93,7 +100,7 @@ public class OrangeHRM {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, enabled = false)
 	public void searchEmployeebyName() throws InterruptedException {
 		logIn();
 		// Navigate to the "PIM" menu and click PIM
@@ -105,30 +112,57 @@ public class OrangeHRM {
 		driver.findElement(By.xpath("//a[normalize-space()='Employee List']")).click();
 		// Enter search criteria (e.g., employee name)
 		driver.findElement(By.xpath("(//input[@placeholder='Type for hints...'])[1]")).sendKeys("Istiak");
-		
+
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();		
-        //  //div[@role='rowgroup']
-		
-		List <WebElement> element1 = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span']"));
-	/*	for(int i = 0; i<=element1.size();i++) {
-			System.out.println(i+ element1.get(i).getText());
-		}
-		
-	*/	
-		List <WebElement> element2 = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
+		driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+		// //div[@role='rowgroup']
+
+		List<WebElement> element1 = driver.findElements(By.xpath("//span[@class='oxd-text oxd-text--span']"));
+		/*
+		 * for(int i = 0; i<=element1.size();i++) { System.out.println(i+
+		 * element1.get(i).getText()); }
+		 * 
+		 */
+		List<WebElement> element2 = driver.findElements(By.xpath("//div[@class='oxd-table-card']"));
 		System.out.println(element2.size());
-		int value =element2.size(); 
+		int value = element2.size();
 		String valuetostr = Integer.toString(value);
-		String expectedMessage = "("+valuetostr+") Records Found";
-		
+		String expectedMessage = "(" + valuetostr + ") Records Found";
+
 		String actualMessage = element1.get(0).getText();
-		
+
 		Assert.assertEquals(expectedMessage, actualMessage);
+
+		logout();
+
+	}
+
+	@Test(priority = 5, enabled = true)
+	public void fileUploadTest() throws InterruptedException, IOException {
+		logIn();
+		// Navigate to the "PIM" menu and click PIM
+
+		driver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+
+		// click on configuration button
+		driver.findElement(By.xpath("//span[@class='oxd-topbar-body-nav-tab-item']")).click();
+
+		// click on Data import
+		driver.findElement(By.partialLinkText("Data ")).click();
+		// click on browse button
+		driver.findElement(By.xpath("//div[@class='oxd-file-button']")).click();
+
+		Thread.sleep(5000);// pause of 5 seconds
+
+		Runtime.getRuntime()
+				.exec("D:\\ProgramFiles\\JAVA_automation\\OrangeHRM\\FileUploadOrangeHRM\\fileupload1.exe");
+
+		Thread.sleep(5000);
+
+		// click on upload button
+		driver.findElement(By.xpath("//button[@type='submit']")).submit();
 		
-		
-		
-		//logout();
+		logout();
 
 	}
 

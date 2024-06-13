@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-06-05T01:56:05 BDT" name="Default suite" finished-at="2024-06-05T01:56:40 BDT" duration-ms="35607">
+  <suite started-at="2024-06-14T01:37:46 BDT" name="Default suite" finished-at="2024-06-14T01:41:19 BDT" duration-ms="213251">
     <groups>
     </groups>
-    <test started-at="2024-06-05T01:56:05 BDT" name="Default test" finished-at="2024-06-05T01:56:40 BDT" duration-ms="35607">
+    <test started-at="2024-06-14T01:37:46 BDT" name="Default test" finished-at="2024-06-14T01:41:19 BDT" duration-ms="213251">
       <class name="Demo.OrangeHRM">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:Demo.OrangeHRM@45752059]" started-at="2024-06-05T01:56:05 BDT" name="setUp" finished-at="2024-06-05T01:56:15 BDT" duration-ms="10009" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:Demo.OrangeHRM@292b08d6]" started-at="2024-06-14T01:37:46 BDT" name="setUp" finished-at="2024-06-14T01:40:19 BDT" duration-ms="152555" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="searchEmployeebyName()[pri:4, instance:Demo.OrangeHRM@45752059]" started-at="2024-06-05T01:56:15 BDT" name="searchEmployeebyName" finished-at="2024-06-05T01:56:25 BDT" duration-ms="10350" status="PASS">
+        <test-method signature="fileUploadTest()[pri:5, instance:Demo.OrangeHRM@292b08d6]" started-at="2024-06-14T01:40:19 BDT" name="fileUploadTest" finished-at="2024-06-14T01:41:04 BDT" duration-ms="45359" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchEmployeebyName -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:Demo.OrangeHRM@45752059]" started-at="2024-06-05T01:56:25 BDT" name="tearDown" finished-at="2024-06-05T01:56:40 BDT" duration-ms="15213" status="PASS">
+        </test-method> <!-- fileUploadTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:Demo.OrangeHRM@292b08d6]" started-at="2024-06-14T01:41:04 BDT" name="tearDown" finished-at="2024-06-14T01:41:19 BDT" duration-ms="15287" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
