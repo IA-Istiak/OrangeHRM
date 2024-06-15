@@ -137,7 +137,7 @@ public class OrangeHRM {
 
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = false)
 	public void fileUploadTest() throws InterruptedException, IOException {
 		logIn();
 		// Navigate to the "PIM" menu and click PIM
@@ -164,6 +164,47 @@ public class OrangeHRM {
 		
 		logout();
 
+	}
+	
+	@Test(priority = 6, enabled = true)
+	public void addEmployeewithImage() throws InterruptedException, IOException {
+		logIn();
+		// Navigate to the "PIM" menu and click PIM
+
+		driver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+		// click on Add Employee
+		driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
+		Thread.sleep(5000);
+		
+		driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("Istiak");
+		driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Ahamed");
+		//click + icon to add image
+		driver.findElement(By.xpath("//i[@class='oxd-icon bi-plus']")).click();
+		
+		Thread.sleep(5000);// pause of 5 seconds
+
+		Runtime.getRuntime()
+				.exec("D:\\ProgramFiles\\JAVA_automation\\OrangeHRM\\FileUploadOrangeHRM\\EmployeeimageUpload.exe");
+
+		Thread.sleep(5000);
+		
+		driver.findElement(By.xpath("//button[@type = 'submit']")).click();
+		Thread.sleep(1500);
+		// Verify if the employee is successfully added by checking the employee list
+		// personal details
+		String confirmationMessage = driver.findElement(By.xpath("//h6[normalize-space()='Personal Details']"))
+				.getText();
+
+		
+
+		if (confirmationMessage.contains("Personal Details")) {
+			System.out.println("Employee added successfully!");
+		} else {
+			System.out.println("Failed to add employee!");
+		}
+		Assert.assertEquals("Personal Details", confirmationMessage);
+
+		logout();
 	}
 
 	public void logout() throws InterruptedException {
