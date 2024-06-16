@@ -5,9 +5,12 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import junit.framework.Assert;
@@ -154,18 +157,17 @@ public class OrangeHRM {
 
 		Thread.sleep(5000);// pause of 5 seconds
 
-		Runtime.getRuntime()
-				.exec("D:\\ProgramFiles\\JAVA_automation\\OrangeHRM\\FileUploadOrangeHRM\\fileupload1.exe");
+		Runtime.getRuntime().exec("D:\\ProgramFiles\\JAVA_automation\\OrangeHRM\\FileUploadOrangeHRM\\fileupload1.exe");
 
 		Thread.sleep(5000);
 
 		// click on upload button
 		driver.findElement(By.xpath("//button[@type='submit']")).submit();
-		
+
 		logout();
 
 	}
-	
+
 	@Test(priority = 6, enabled = true)
 	public void addEmployeewithImage() throws InterruptedException, IOException {
 		logIn();
@@ -175,19 +177,19 @@ public class OrangeHRM {
 		// click on Add Employee
 		driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
 		Thread.sleep(5000);
-		
+
 		driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("Istiak");
 		driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Ahamed");
-		//click + icon to add image
+		// click + icon to add image
 		driver.findElement(By.xpath("//i[@class='oxd-icon bi-plus']")).click();
-		
+
 		Thread.sleep(5000);// pause of 5 seconds
 
 		Runtime.getRuntime()
 				.exec("D:\\ProgramFiles\\JAVA_automation\\OrangeHRM\\FileUploadOrangeHRM\\EmployeeimageUpload.exe");
 
 		Thread.sleep(5000);
-		
+
 		driver.findElement(By.xpath("//button[@type = 'submit']")).click();
 		Thread.sleep(1500);
 		// Verify if the employee is successfully added by checking the employee list
@@ -195,7 +197,72 @@ public class OrangeHRM {
 		String confirmationMessage = driver.findElement(By.xpath("//h6[normalize-space()='Personal Details']"))
 				.getText();
 
+		if (confirmationMessage.contains("Personal Details")) {
+			System.out.println("Employee added successfully!");
+		} else {
+			System.out.println("Failed to add employee!");
+		}
+		Assert.assertEquals("Personal Details", confirmationMessage);
+
+		logout();
+	}
+
+	@Test(priority = 7, enabled = true)
+	public void deleteEmployee() throws InterruptedException {
+		logIn();
+
+		// Navigate to the "PIM" menu and click PIM
+
+		driver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+
+		// select "Employee List".
+
+		driver.findElement(By.xpath("//a[normalize-space()='Employee List']")).click();
+		// Enter search criteria (e.g., employee name)
+		driver.findElement(By.xpath("(//input[@placeholder='Type for hints...'])[1]")).sendKeys("Istiak");
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+		// Locate the element you want to scroll to
+		WebElement element = driver.findElement(By.xpath("//i[@class='oxd-icon bi-trash']"));
+		// Cast driver to JavascriptExecutor
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
+		// Scroll the element into view
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+		
+		//Use WebDriverWait to wait for the element to be visible
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOf(element));
+
+		element.click();
+		driver.findElement(By.xpath("//button[normalize-space()='Yes, Delete']")).click();
+		
+		
+
+		logout();
+	}
+
+	public void PrerequestaddEmployee() throws InterruptedException {
+		logIn();
+		// Navigate to the "PIM" menu and click PIM
+
+		driver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+		// click on Add Employee
+		driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
+		driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("Istiak");
+		driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Ahamed");
+		driver.findElement(By.xpath("//button[@type = 'submit']")).click();
+		Thread.sleep(1500);
+		// Verify if the employee is successfully added by checking the employee list
+		// personal details
+		String confirmationMessage = driver.findElement(By.xpath("//h6[normalize-space()='Personal Details']"))
+				.getText();
+
+		/*
+		 * WebElement userid = driver.findElements(By.tagName("input")).get(5); String
+		 * id = userid.getAttribute("value"); System.out.println(id +"AFSDF");
+		 * Thread.sleep(1500);
+		 */
 
 		if (confirmationMessage.contains("Personal Details")) {
 			System.out.println("Employee added successfully!");

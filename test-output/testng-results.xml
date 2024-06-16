@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-06-16T01:35:16 BDT" name="Default suite" finished-at="2024-06-16T01:38:23 BDT" duration-ms="187463">
+  <suite started-at="2024-06-17T00:48:03 BDT" name="Default suite" finished-at="2024-06-17T00:49:43 BDT" duration-ms="99136">
     <groups>
     </groups>
-    <test started-at="2024-06-16T01:35:16 BDT" name="Default test" finished-at="2024-06-16T01:38:23 BDT" duration-ms="187463">
+    <test started-at="2024-06-17T00:48:03 BDT" name="Default test" finished-at="2024-06-17T00:49:43 BDT" duration-ms="99136">
       <class name="Demo.OrangeHRM">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:Demo.OrangeHRM@22555ebf]" started-at="2024-06-16T01:35:16 BDT" name="setUp" finished-at="2024-06-16T01:37:11 BDT" duration-ms="115573" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:Demo.OrangeHRM@38425407]" started-at="2024-06-17T00:48:03 BDT" name="setUp" finished-at="2024-06-17T00:49:00 BDT" duration-ms="56247" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="addEmployeewithImage()[pri:6, instance:Demo.OrangeHRM@22555ebf]" started-at="2024-06-16T01:37:11 BDT" name="addEmployeewithImage" finished-at="2024-06-16T01:38:08 BDT" duration-ms="56555" status="PASS">
+        <test-method signature="deleteEmployee()[pri:7, instance:Demo.OrangeHRM@38425407]" started-at="2024-06-17T00:49:00 BDT" name="deleteEmployee" finished-at="2024-06-17T00:49:27 BDT" duration-ms="27594" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- addEmployeewithImage -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:Demo.OrangeHRM@22555ebf]" started-at="2024-06-16T01:38:08 BDT" name="tearDown" finished-at="2024-06-16T01:38:23 BDT" duration-ms="15280" status="PASS">
+        </test-method> <!-- deleteEmployee -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:Demo.OrangeHRM@38425407]" started-at="2024-06-17T00:49:27 BDT" name="tearDown" finished-at="2024-06-17T00:49:43 BDT" duration-ms="15260" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
